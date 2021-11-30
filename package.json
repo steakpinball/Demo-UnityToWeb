@@ -1,0 +1,18 @@
+{
+  "name": "web-example",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brian Turner <brian@brianturner.info>",
+  "license": "MIT",
+  "dependencies": {
+    "vite": "^2.6.14"
+  },
+  "devDependencies": {
+    "sass": "^1.43.5"
+  }
+}

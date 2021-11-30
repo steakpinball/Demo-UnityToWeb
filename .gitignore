@@ -1,0 +1,9 @@
+/Builds/
+/Library/
+/Logs/
+/node_modules/
+/Temp/
+/UserSettings/
+
+/*.csproj
+/*.sln

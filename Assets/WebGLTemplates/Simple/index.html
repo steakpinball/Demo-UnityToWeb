@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{{ PRODUCT_NAME }}} - {{{ COMPANY_NAME }}}</title>
+    <style>
+        canvas {
+            background: {{{ BACKGROUND_FILENAME ? `url("Build/${encodeURIComponent(BACKGROUND_FILENAME)}") center / cover` : BACKGROUND_COLOR }}};
+            height: {{{ HEIGHT }}}px;
+            width: {{{ WIDTH }}}px;
+        }
+    </style>
+    <link rel="stylesheet" href="src/styles.scss" />
+    <script>
+        var game;
+        async function finishLoading() {
+            const config = {
+                dataUrl: "Build/{{{ DATA_FILENAME }}}",
+                frameworkUrl: "Build/{{{ FRAMEWORK_FILENAME }}}",
+                codeUrl: "Build/{{{ CODE_FILENAME }}}",
+#if MEMORY_FILENAME
+                memoryUrl: "Build/{{{ MEMORY_FILENAME }}}",
+#endif
+#if SYMBOLS_FILENAME
+                symbolsUrl: "Build/{{{ SYMBOLS_FILENAME }}}",
+#endif
+                streamingAssetsUrl: "StreamingAssets",
+                companyName: "{{{ COMPANY_NAME }}}",
+                productName: "{{{ PRODUCT_NAME }}}",
+                productVersion: "{{{ PRODUCT_VERSION }}}",
+            };
+
+            try {
+                game = await createUnityInstance(document.getElementsByTagName('canvas')[0], config, o => {console.log(o)})
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    </script>
+    <script defer src="Build/{{{ LOADER_FILENAME }}}" onload="finishLoading()"></script>
+    <script type="module" src="src/code.ts"></script>
+</head>
+<body>
+    <canvas id="game" height="{{{ HEIGHT }}}" width="{{{ WIDTH }}}"/>
+</body>
+</html>
