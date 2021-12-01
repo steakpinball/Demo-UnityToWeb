@@ -2,7 +2,11 @@ body {
     margin: 0;
 }
 
-canvas {
-    display: block;
+#root {
     margin: 0 auto;
+}
+
+.extras {
+    display: flex;
+    justify-content: space-between;
 }

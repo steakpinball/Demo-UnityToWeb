@@ -4,13 +4,16 @@
     <meta charset="utf-8">
     <title>{{{ PRODUCT_NAME }}} - {{{ COMPANY_NAME }}}</title>
     <style>
-        canvas {
+        #root {
+            width: {{{ WIDTH }}}px;
+        }
+        #game {
             background: {{{ BACKGROUND_FILENAME ? `url("Build/${encodeURIComponent(BACKGROUND_FILENAME)}") center / cover` : BACKGROUND_COLOR }}};
             height: {{{ HEIGHT }}}px;
             width: {{{ WIDTH }}}px;
         }
     </style>
-    <link rel="stylesheet" href="src/styles.scss" />
+    <link rel="stylesheet" href="./src/styles.scss" />
     <script>
         var game;
         async function finishLoading() {
@@ -31,16 +34,24 @@
             };
 
             try {
-                game = await createUnityInstance(document.getElementsByTagName('canvas')[0], config, o => {console.log(o)})
+                game = await createUnityInstance(document.querySelector('#game'), config, o => {console.log(o)})
             } catch (error) {
                 console.error(error);
             }
         }
     </script>
     <script defer src="Build/{{{ LOADER_FILENAME }}}" onload="finishLoading()"></script>
-    <script type="module" src="src/code.ts"></script>
+    <script type="module" src="./src/code.ts"></script>
 </head>
 <body>
-    <canvas id="game" height="{{{ HEIGHT }}}" width="{{{ WIDTH }}}"/>
+    <div id="root">
+        <canvas id="game" height="{{{ HEIGHT }}}" width="{{{ WIDTH }}}"/>
+        <div class="extras">
+            <p>Score: <span id="score"></span></p>
+            <form id="player-input">
+                <label>Character Name: <input name="name" /></label>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
